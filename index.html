@@ -9,6 +9,8 @@
 <meta name="author" content="Mahlako Mogale Physiotherapy">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#2F80ED">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   </head>
@@ -20,12 +22,16 @@
           <img src="images/clinic.logo.jpg" alt="MAHLAKO MOGALE PHYSIOTHERAPY" class="brand-logo">
         </a>
         <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#services">Our Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#testimonials">Why Choose Us?</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+  <li class="nav-menu-slogan">
+    <span>Your Movement, Our Priority</span>
+  </li>
+
+  <li><a href="#home">Home</a></li>
+  <li><a href="#services">Our Services</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#testimonials">Why Choose Us?</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
         <a class="nav-cta" href="#contact">Book Appointment</a>
         <button class="nav-toggle" type="button" aria-label="Open navigation menu">
           <span class="nav-toggle__line"></span>
@@ -36,12 +42,11 @@
       <div class="nav-overlay" aria-hidden="true"></div>
 
       <div class="hero-content">
-        <span class="hero-subtitle">Your Movement, Our Priority</span>
+    
         <h1>Helping You Move Better, Recover Faster, and Live Without Pain.</h1>
         <p>
-          Experience evidence-based treatment in a modern clinical environment 
-          dedicated to your long-term physical health and performance.
-        </p>
+  Evidence-based physiotherapy designed around your recovery, movement, and long-term wellbeing.
+</p>
         
         <div class="hero-actions">
           <a class="cta" href="#contact">Book Appointment</a>
@@ -724,6 +729,12 @@
         navOverlay.addEventListener('click', closeMenu);
         navOverlay.addEventListener('touchstart', closeMenu, { passive: true });
       }
+
+      navLinks.forEach((link) => {
+  link.addEventListener('click', () => {
+    closeMenu();
+  });
+});
 
       const sectionPairs = Array.from(navLinks)
         .map((link) => {

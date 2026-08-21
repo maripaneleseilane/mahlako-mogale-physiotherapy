@@ -713,6 +713,11 @@ body.menu-open .site-nav.nav-hidden {
   line-height: 1.5;
 }
 
+/* Menu slogan is for the mobile navigation only */
+.nav-menu-slogan {
+  display: none;
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -791,7 +796,8 @@ body.menu-open .site-nav.nav-hidden {
       visibility 0.45s ease;
   }
 
-  .nav-menu-slogan {
+ .nav-menu-slogan {
+    display: list-item;
     width: 100%;
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
@@ -800,7 +806,7 @@ body.menu-open .site-nav.nav-hidden {
 
     counter-increment: none !important;
     list-style: none;
-  }
+}
 
   .nav-menu-slogan span {
     display: block;

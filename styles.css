@@ -1585,3 +1585,14 @@ body.menu-open .site-nav.nav-hidden {
     align-items: flex-start;
   }
 }
+/* --- Final mobile contact-card layout --- */
+@media (max-width: 480px) {
+  .contact-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-banner-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

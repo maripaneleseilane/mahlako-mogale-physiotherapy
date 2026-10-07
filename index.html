@@ -11,10 +11,40 @@
 <meta name="theme-color" content="#2F80ED">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
-    <link rel="stylesheet" href="styles.css" />
+
+<link
+  rel="preload"
+  as="image"
+  href="images/NewHero.jpg"
+  fetchpriority="high">
+
+<link
+  rel="preload"
+  as="image"
+  href="images/clinic.logo.jpg"
+  fetchpriority="high">
+
+<link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   </head>
-  <body>
+  <body class="site-loading">
+
+  <!-- INITIAL PAGE LOADER -->
+  <div
+    class="site-loader"
+    role="status"
+    aria-live="polite"
+    aria-label="Loading Mahlako Mogale Physiotherapy">
+
+    <div class="site-loader__grid" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+
     <!-- HERO SECTION -->
     <header id="home" class="hero" role="banner">
       <div class="hero-bg" aria-hidden="true"></div>
@@ -1595,6 +1625,74 @@ window.addEventListener(
     );
 
   aboutObserver.observe(aboutEditorial);
+
+})();
+
+/* =========================================================
+   INITIAL PAGE LOADER — CRITICAL ASSET READY STATE
+   ========================================================= */
+
+(() => {
+  const loader = document.querySelector('.site-loader');
+
+  if (!loader) {
+    document.body.classList.remove('site-loading');
+    return;
+  }
+
+  const waitForImage = (src) => {
+    return new Promise((resolve) => {
+      const image = new Image();
+
+      const finish = () => {
+        resolve();
+      };
+
+      image.onload = finish;
+      image.onerror = finish;
+
+      image.src = src;
+
+      if (image.complete && image.naturalWidth > 0) {
+        if (typeof image.decode === 'function') {
+          image.decode().then(finish).catch(finish);
+        } else {
+          finish();
+        }
+      }
+    });
+  };
+
+  const criticalAssets = [
+    waitForImage('images/NewHero.jpg'),
+    waitForImage('images/clinic.logo.jpg')
+  ];
+
+  const fontReady =
+    document.fonts && document.fonts.ready
+      ? document.fonts.ready.catch(() => {})
+      : Promise.resolve();
+
+  const safetyTimeout = new Promise((resolve) => {
+    window.setTimeout(resolve, 2500);
+  });
+
+  Promise.race([
+    Promise.all([
+      ...criticalAssets,
+      fontReady
+    ]),
+    safetyTimeout
+  ]).then(() => {
+    requestAnimationFrame(() => {
+      loader.classList.add('is-hidden');
+      document.body.classList.remove('site-loading');
+
+      window.setTimeout(() => {
+        loader.remove();
+      }, 500);
+    });
+  });
 
 })();
 
